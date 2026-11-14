@@ -8,6 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
+Cals/venv
 CAD/
 build/
 develop-eggs/
