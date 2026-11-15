@@ -17,7 +17,6 @@ class Cycloid(Geometry, Vectors, plotter):
     # material properties
     E1 = 69.5 # GPa
     E2 = 69.5 # GPa
-    
 
     v1 = v2 = 0.33
     YIELD = 275          # MPa

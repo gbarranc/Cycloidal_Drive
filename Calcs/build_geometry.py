@@ -12,7 +12,7 @@ class Geometry:
     OUTPUT_PIN_RADIUS = 36.98
     OUTPUT_PIN_COUNT = 8
 
-    # ---------- cycloid disc profile ----------
+    # cycloid disc profile
     def _contact_angle(self, k):
         #Contact angle Psi as a function of the sweep parameter k
         return np.arctan(np.sin(self.Z1 * k) /
