@@ -14,12 +14,12 @@ class Geometry:
 
     # ---------- cycloid disc profile ----------
     def _contact_angle(self, k):
-        """Contact angle Psi as a function of the sweep parameter k."""
+        #Contact angle Psi as a function of the sweep parameter k
         return np.arctan(np.sin(self.Z1 * k) /
                          (np.cos(self.Z1 * k) - self.Rr_1 / (self.e * (self.Z1 + 1))))
 
     def f(self, k):
-        """Cycloid profile point (x, y) at parameter k (scalar or array)."""
+        #Cycloid profile point (x, y) at parameter k (scalar or array)
         psi = self._contact_angle(k)
         x = (self.Rr_1 * np.cos(k) - self.R_1 * np.cos(k + psi)
              - self.e * np.cos(k * (self.Z1 + 1)))
@@ -28,17 +28,17 @@ class Geometry:
         return x, y
 
     def geometry(self):
-        """Full cycloid profile over self.x."""
+        #Full cycloid profile over self.x
         return self.f(self.x)
 
     def g(self, l):
-        """Shrunken roller circle (R_1 - scale) around the current roller
-        center (self.Ex, self.Ey); used by the contact solver."""
+        # Shrunken roller circle (R_1 - scale) around the current roller
+        # center (self.Ex, self.Ey); used by the contact solver
         scale = 2
         return ((self.R_1 - scale) * np.cos(l) + (self.Ex - self.e),
                 (self.R_1 - scale) * np.sin(l) + self.Ey)
 
-    # ---------- housing rollers ----------
+    # housing rollers
     def center_of_rollers(self):
         centers = np.zeros((self.Z2, 2))
         for i in range(self.Z2):
@@ -47,7 +47,7 @@ class Geometry:
         return centers
 
     def rollers(self):
-        """360 outline points per roller."""
+        #360 outline points per roller
         size = (self.Z2 + 1) * 360
         shell = np.zeros((size, 2))
         centers = self.center_of_rollers()
@@ -58,12 +58,12 @@ class Geometry:
             shell[start:start + 360, 1] = self.R_1 * np.sin(theta) + centers[i, 1]
         return shell
 
-    # ---------- bore / output pins ----------
+    # bore / output pins
     def bore(self):
         return self.B * np.cos(self.x) + self.e, self.B * np.sin(self.x)
 
     def output_rollers(self):
-        """Returns (Output_Rollers, Output_pins, M_inner moment arms)."""
+        #Returns (Output_Rollers, Output_pins, M_inner moment arms)
         n, rad = self.OUTPUT_PIN_COUNT, self.OUTPUT_PIN_RADIUS
         size = (self.Z2 + 1) * 360 + 1
         rollers = np.zeros((size, 2))

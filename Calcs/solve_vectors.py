@@ -78,7 +78,7 @@ class Vectors:
 
     # forces / stresses
     def force_balance(self, T_input):
-        """Returns (max outer force, outer index, max inner force, inner index)."""
+        #Returns (max outer force, outer index, max inner force, inner index)
         T_output = T_input * self.Z1
         m_outer = self.contacts[:, 2]
         x_outer = self.contacts[:, 0]
